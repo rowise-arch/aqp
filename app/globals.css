@@ -1461,41 +1461,34 @@ html.motion .overture .facts li[data-side="r"] {
   }
 }
 
-/* ───────── Cursor: trailing monogram badge (mouse only) ───────── */
-.cursor-badge {
+/* ───────── Cursor: trailing ring and dot (mouse only) ───────── */
+.cursor-ring,
+.cursor-dot {
   display: none;
 }
 @media (hover: hover) and (pointer: fine) and (min-width: 768px) {
-  .cursor-badge {
+  .cursor-ring,
+  .cursor-dot {
+    display: block;
     position: fixed;
     left: 0;
     top: 0;
-    z-index: 9999;
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    overflow: hidden;
-    border: 1px solid rgba(198, 167, 94, 0.8);
-    border-radius: 999px;
-    background: rgba(14, 14, 14, 0.55);
-    backdrop-filter: blur(4px);
     pointer-events: none;
+    border-radius: 50%;
     opacity: 0;
   }
-  .cursor-mark {
-    grid-area: 1 / 1;
-    width: 14px;
-    height: auto;
+  .cursor-ring {
+    z-index: 9999;
+    width: 20px;
+    height: 20px;
+    background: rgba(198, 167, 94, 0.4);
+    border: 0 solid rgba(198, 167, 94, 0.8);
+    mix-blend-mode: difference;
   }
-  .cursor-label {
-    grid-area: 1 / 1;
-    opacity: 0;
-    white-space: nowrap;
-    font-size: 0.6875rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--bg);
+  .cursor-dot {
+    z-index: 10000;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
   }
 }
