@@ -71,13 +71,12 @@ export default function Effects() {
         }
       }
 
-      // Motion that is driven by the visitor's own scrolling (the pinned row, the mirror dial, the panels
-      // growing in) runs whatever the system setting says. What moves on its own (the preloader, the hero
-      // entrance, fade-ins, smooth-scroll easing) stays off when the system asks for reduced motion.
+      // Scroll-driven motion, smooth scrolling and fade-ins run whatever the system setting says (many
+      // Windows PCs report reduced motion by default). Only the preloader and hero entrance stay gated.
       document.documentElement.classList.add("motion");
 
       /* ───── Smooth scroll ───── */
-      if (!reduce) {
+      {
         lenis = new Lenis({ lerp: 0.09, anchors: { offset: -76 } });
         lenis.on("scroll", ScrollTrigger.update);
         tick = (t: number) => lenis?.raf(t * 1000);
@@ -108,7 +107,7 @@ export default function Effects() {
         },
         { rootMargin: "0px" },
       );
-      if (!reduce) targets.forEach((el) => io?.observe(el));
+      targets.forEach((el) => io?.observe(el));
 
       /* ───── Category panels grow and brighten as they arrive ───── */
       gsap.utils.toArray<HTMLElement>(".cat").forEach((cat) => {
