@@ -76,7 +76,9 @@ export default function Effects() {
       /* ───── Smooth scroll ───── */
       {
         lenis = new Lenis({
-          duration: 1.8,
+          duration: 1.6,
+          wheelMultiplier: 2,
+          touchMultiplier: 2,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           anchors: { offset: -76 },
         });
