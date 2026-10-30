@@ -1,4 +1,5 @@
 import { studio } from "@/lib/content";
+import MapLink from "./MapLink";
 
 export default function Footer() {
   return (
@@ -29,7 +30,12 @@ export default function Footer() {
         </nav>
         <address>
           <p className="label">Visit and call</p>
-          <p>{studio.address}</p>
+          <p>
+            <MapLink>{studio.address}</MapLink>
+          </p>
+          <p>
+            <MapLink>Get directions</MapLink>
+          </p>
           <p>
             {studio.phones.map((p, i) => (
               <span key={p.href}>
