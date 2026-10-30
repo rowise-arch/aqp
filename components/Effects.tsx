@@ -112,14 +112,13 @@ export default function Effects() {
         );
       });
 
-      /* ───── The mirror dial: pinned; scale, turn and fade follow the scroll, bulbs light in turn ───── */
+      /* ───── The monogram: pinned; scale, turn and fade follow the scroll, facts arrive around it ───── */
       const ov = document.querySelector<HTMLElement>(".overture");
       if (ov) {
         const ring = ov.querySelector("[data-ring]");
         const l1 = ov.querySelector("[data-line1]");
         const l2 = ov.querySelector("[data-line2]");
         const facts = ov.querySelectorAll("[data-fact]");
-        const bulbs = ov.querySelectorAll(".bulb");
         const tl = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: { trigger: ov, start: "top bottom", end: "bottom top", scrub: true },
@@ -128,8 +127,7 @@ export default function Effects() {
           .to(ring, { scale: 1.3, duration: 0.4 }, 0.6)
           .fromTo(ring, { opacity: 0 }, { opacity: 1, duration: 0.2 }, 0)
           .to(ring, { opacity: 0, duration: 0.2 }, 0.8)
-          .fromTo(ring, { rotation: 0 }, { rotation: 120, duration: 1 }, 0)
-          .fromTo(bulbs, { opacity: 0.12 }, { opacity: 1, duration: 0.04, stagger: 0.012 }, 0.1)
+          .fromTo(ring, { rotation: -30 }, { rotation: 30, duration: 1 }, 0)
           .fromTo(facts, { opacity: 0, x: (i: number) => (i % 2 ? 20 : -20) }, { opacity: 1, x: 0, duration: 0.1, stagger: 0.05 }, 0.3)
           .to(facts, { opacity: 0, duration: 0.15 }, 0.8)
           .fromTo(l1, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.1 }, 0.4)
