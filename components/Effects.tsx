@@ -77,7 +77,7 @@ export default function Effects() {
       {
         lenis = new Lenis({
           duration: 1.6,
-          wheelMultiplier: 2,
+          wheelMultiplier: 1,
           touchMultiplier: 2,
           respectReducedMotion: false,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
