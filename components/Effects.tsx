@@ -30,23 +30,12 @@ export default function Effects() {
         gsap.from(".hero .cta", { opacity: 0, y: 20, duration: 1.2, ease: E, delay: 1 });
         gsap.from("[data-hero]", { opacity: 0, duration: 1.2, delay: 1.6 });
 
-        // the dial draws itself: circles trace in, ticks arrive one by one, the pulse keeps going
-        const draw = (sel: string, vars: gsap.TweenVars) => {
-          gsap.fromTo(sel, { strokeDasharray: 1, strokeDashoffset: 1 }, { strokeDashoffset: 0, ...vars });
-        };
-        draw(".dial .d48", { duration: 3, ease: E });
-        gsap.from(".dial .d48", { rotation: -90, svgOrigin: "50 50", duration: 3, ease: E });
-        draw(".dial .d45", { duration: 2.5, ease: "power2.inOut" });
-        gsap.from(".dial .d45", { rotation: -90, svgOrigin: "50 50", duration: 2.5, ease: "power2.inOut" });
-        draw(".dial .d32", { duration: 3, ease: "power2.inOut", delay: 0.5 });
-        gsap.from(".dial .d32", { rotation: 90, svgOrigin: "50 50", duration: 3, ease: "power2.inOut", delay: 0.5 });
-        gsap.from(".dial .tick", { opacity: 0, duration: 1, delay: 1.5, stagger: 0.02 });
-        gsap.from(".dial .cross", { opacity: 0, duration: 2, delay: 1.2, ease: "power2.inOut" });
-        gsap.from(".dial .corners", { opacity: 0, scale: 0.9, svgOrigin: "50 50", duration: 2.5, delay: 1.5 });
+        // the monogram settles in: it eases from slightly larger and turned, then breathes
+        gsap.from(".dial .mark", { opacity: 0, scale: 1.12, rotation: -8, duration: 3, ease: E });
         gsap.fromTo(
-          ".dial .pulse",
-          { opacity: 0.1, scale: 1, svgOrigin: "50 50" },
-          { opacity: 0.3, scale: 1.1, svgOrigin: "50 50", duration: 2, yoyo: true, repeat: -1, ease: "sine.inOut" },
+          ".dial .mark",
+          { filter: "brightness(1)" },
+          { filter: "brightness(1.25)", duration: 3, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 3 },
         );
       };
 

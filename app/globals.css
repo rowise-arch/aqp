@@ -372,16 +372,20 @@ h2 em {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: min(100vw, 118svh, 1280px);
+  width: min(100vw, 104svh, 1280px);
   aspect-ratio: 1;
-  transform: translate(-50%, -48%);
+  transform: translate(-50%, -46%);
   pointer-events: none;
   opacity: 0.55;
 }
-.hero .dial svg {
+.hero .dial .mark {
+  display: block;
   width: 100%;
   height: 100%;
-  overflow: visible;
+  object-fit: contain;
+  /* the picture's own dark ground fades into the page */
+  -webkit-mask-image: radial-gradient(circle closest-side, #000 86%, transparent 100%);
+  mask-image: radial-gradient(circle closest-side, #000 86%, transparent 100%);
 }
 .hero::before,
 .hero::after {
