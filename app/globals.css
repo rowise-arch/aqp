@@ -1460,3 +1460,35 @@ html.motion .overture .facts li[data-side="r"] {
     grid-template-columns: 1fr;
   }
 }
+
+/* ───────── Cursor: trailing ring and dot (mouse only) ───────── */
+.cursor-ring,
+.cursor-dot {
+  display: none;
+}
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+  .cursor-ring,
+  .cursor-dot {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    opacity: 0;
+  }
+  .cursor-ring {
+    z-index: 9999;
+    width: 20px;
+    height: 20px;
+    background: rgba(198, 167, 94, 0.4);
+    border: 0 solid rgba(198, 167, 94, 0.8);
+    mix-blend-mode: difference;
+  }
+  .cursor-dot {
+    z-index: 10000;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+  }
+}

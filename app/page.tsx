@@ -1,3 +1,4 @@
+import Cursor from "@/components/Cursor";
 import Effects from "@/components/Effects";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <>
       <Effects />
+      <Cursor />
       <Header />
       <main id="main">
         <Hero />
