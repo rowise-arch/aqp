@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "project": {
+    "name": "site",
+    "productType": "Salon website with online booking (AQP Beauty Studio, Odiongan)",
+    "stack": [
+      "nextjs",
+      "react",
+      "tailwind-v4"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "app/globals.css"
+    ],
+    "components": [],
+    "assets": [],
+    "instructions": [
+      "AGENTS.md"
+    ]
+  },
+  "design": {
+    "colorMode": "dark",
+    "colors": {
+      "--bg": {
+        "value": "#0e0e0e",
+        "source": "app/globals.css"
+      },
+      "--ink": {
+        "value": "#f5f2ea",
+        "source": "app/globals.css"
+      },
+      "--accent": {
+        "value": "#c9a75a",
+        "source": "app/globals.css"
+      },
+      "--muted": {
+        "value": "#a9a59b",
+        "source": "app/globals.css"
+      }
+    },
+    "typography": {
+      "--font-display": {
+        "value": "Playfair Display (headings, italic second phrase)",
+        "source": "app/layout.tsx"
+      },
+      "--font-sans": {
+        "value": "Inter (body, labels, buttons)",
+        "source": "app/layout.tsx"
+      }
+    },
+    "spacing": {},
+    "radius": {
+      "buttons": {
+        "value": "0 (square)",
+        "source": "app/globals.css"
+      }
+    },
+    "shadows": {},
+    "motion": {
+      "--ease": {
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "source": "app/globals.css"
+      }
+    },
+    "density": "spacious, editorial"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [
+      "Charcoal ground #0e0e0e, warm ink #f5f2ea, one gold accent #c9a75a",
+      "Playfair Display for headings with an italic second phrase; Inter for body; tracked uppercase gold labels above headings",
+      "Square buttons, flat gold fill, tracked caps; 1px gold hairlines (--line) for borders and dividers",
+      "Respect prefers-reduced-motion; keyboard focus ring is 2px gold",
+      "Plain CSS in app/globals.css; Next.js 16 (read node_modules/next/dist/docs before using APIs)"
+    ],
+    "avoid": [
+      "Shadows at rest, glass/backdrop blur, soft rounded corners",
+      "Icon-topped cards, emoji, violet/indigo, monospace",
+      "Pre-hiding content for animation: elements stay visible and only fade in as they enter the screen"
+    ]
+  },
+  "decisions": [
+    {
+      "decision": "Rebrand (2026-10-31) after the Aevum / ChronoVault reference: centred ring hero, recent-looks card row, category panels, Playfair + Inter. Replaced the dark-room direction; the hero photo strip became the Recent looks row.",
+      "date": "2026-10-31"
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "design.colorMode:light",
+      "source": "app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "app/globals.css"
+    },
+    {
+      "fact": "project.instructions",
+      "source": "AGENTS.md"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:tailwind-v4",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-10-30T17:16:20.592Z"
+}
