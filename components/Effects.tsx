@@ -79,6 +79,7 @@ export default function Effects() {
           duration: 1.6,
           wheelMultiplier: 2,
           touchMultiplier: 2,
+          respectReducedMotion: false,
           easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
           anchors: { offset: -76 },
         });
