@@ -12,7 +12,6 @@ gsap.registerPlugin(ScrollTrigger);
 // Content is visible in the markup; everything here only adds motion on top.
 export default function Effects() {
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const pre = document.querySelector<HTMLElement>(".preloader");
     const seen = sessionStorage.getItem("aqp-seen") === "1";
     let lenis: Lenis | null = null;
@@ -23,7 +22,6 @@ export default function Effects() {
     const ctx = gsap.context(() => {
       /* ───── Hero entrance, run once the preloader is done ───── */
       const heroIn = () => {
-        if (reduce) return;
         const E = "expo.out";
         gsap.from(".bar", { opacity: 0, y: -16, duration: 0.9, ease: "power3.out" });
         gsap.from(".hero .eyebrow", { opacity: 0, y: -20, duration: 1, ease: E });
@@ -53,7 +51,7 @@ export default function Effects() {
       };
 
       if (pre) {
-        if (reduce || seen) {
+        if (seen) {
           pre.remove();
           heroIn();
         } else {
@@ -71,8 +69,8 @@ export default function Effects() {
         }
       }
 
-      // Scroll-driven motion, smooth scrolling and fade-ins run whatever the system setting says (many
-      // Windows PCs report reduced motion by default). Only the preloader and hero entrance stay gated.
+      // All motion runs whatever the system setting says: many Windows PCs report reduced motion by
+      // default, and this demo is meant to be seen with its animation.
       document.documentElement.classList.add("motion");
 
       /* ───── Smooth scroll ───── */
