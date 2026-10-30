@@ -75,7 +75,11 @@ export default function Effects() {
 
       /* ───── Smooth scroll ───── */
       {
-        lenis = new Lenis({ lerp: 0.09, anchors: { offset: -76 } });
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          anchors: { offset: -76 },
+        });
         lenis.on("scroll", ScrollTrigger.update);
         tick = (t: number) => lenis?.raf(t * 1000);
         gsap.ticker.add(tick);
