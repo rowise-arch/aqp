@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { strip } from "@/lib/content";
+import SampleNote from "./SampleNote";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -117,6 +118,7 @@ export default function Looks() {
           </li>
         ))}
       </ul>
+      <SampleNote>Sample photographs from Pexels. The studio&apos;s own work replaces them.</SampleNote>
     </section>
   );
 }

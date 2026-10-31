@@ -1,6 +1,8 @@
 import type { Faq as FaqItem } from "@/lib/site-data";
 
-export default function Faq({ items }: { items: FaqItem[] }) {
+import SampleNote from "./SampleNote";
+
+export default function Faq({ items, sample }: { items: FaqItem[]; sample: boolean }) {
   if (items.length === 0) return null;
   return (
     <section className="faq" id="faq" aria-labelledby="faq-title">
@@ -18,6 +20,7 @@ export default function Faq({ items }: { items: FaqItem[] }) {
           </details>
         ))}
       </div>
+      {sample ? <SampleNote>Sample answers, to be confirmed by the studio.</SampleNote> : null}
     </section>
   );
 }

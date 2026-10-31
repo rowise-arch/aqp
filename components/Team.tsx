@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { team } from "@/lib/content";
+import SampleNote from "./SampleNote";
 
 export default function Team() {
   return (
@@ -26,6 +27,7 @@ export default function Team() {
           </li>
         ))}
       </ul>
+      <SampleNote>Sample team: names, roles and portraits are placeholders until the studio shares its own.</SampleNote>
     </section>
   );
 }

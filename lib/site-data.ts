@@ -15,6 +15,8 @@ export type SiteData = {
   notifyEmail: string;
   /** False when Supabase is not set up: the site shows sample data and bookings are not stored. */
   live: boolean;
+  /** True while that part still shows the built-in sample wording because the studio has not saved its own. */
+  sample: { hours: boolean; policy: boolean; faq: boolean };
 };
 
 // SAMPLE wording for the studio to confirm or change in the admin.
@@ -58,6 +60,7 @@ export async function loadSiteData(): Promise<SiteData> {
     reviews: [],
     notifyEmail: process.env.NOTIFY_EMAIL ?? "",
     live: false,
+    sample: { hours: true, policy: true, faq: true },
   };
   const db = getDb();
   if (!db) return base;
@@ -70,16 +73,25 @@ export async function loadSiteData(): Promise<SiteData> {
     if (svc.error) throw svc.error;
     if (set.error) throw set.error;
 
-    const out: SiteData = { ...base, live: true };
+    const out: SiteData = { ...base, live: true, sample: { ...base.sample } };
     if (svc.data.length > 0) {
       out.services = svc.data
         .filter((r) => r.active)
         .map((r) => ({ id: r.id, group: r.grp as Group, name: r.name, variant: r.variant ?? undefined, price: r.price }));
     }
     for (const row of set.data) {
-      if (row.key === "hours") out.hours = { ...defaultHours, ...row.value };
-      if (row.key === "policy") out.policy = { ...defaultPolicy, ...row.value };
-      if (row.key === "faq") out.faq = row.value;
+      if (row.key === "hours") {
+        out.hours = { ...defaultHours, ...row.value };
+        out.sample.hours = false;
+      }
+      if (row.key === "policy") {
+        out.policy = { ...defaultPolicy, ...row.value };
+        out.sample.policy = false;
+      }
+      if (row.key === "faq") {
+        out.faq = row.value;
+        out.sample.faq = false;
+      }
       if (row.key === "reviews") out.reviews = row.value;
       if (row.key === "notify" && row.value?.email) out.notifyEmail = row.value.email;
     }

@@ -32,8 +32,8 @@ export default async function Home() {
         <Reel />
         <Team />
         <Booking services={site.services} hours={site.hours} />
-        <Visit hours={site.hours} policy={site.policy} reviews={site.reviews} />
-        <Faq items={site.faq} />
+        <Visit hours={site.hours} policy={site.policy} reviews={site.reviews} sample={site.sample} />
+        <Faq items={site.faq} sample={site.sample.faq} />
       </main>
       <Footer />
     </>

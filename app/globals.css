@@ -1656,3 +1656,19 @@ html.motion .overture .facts li[data-side="r"] {
   padding: 12px 6px;
   margin: -12px -6px;
 }
+
+/* Placeholder content is labelled until the studio confirms it */
+.sample-note {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.35rem 0.8rem;
+  border: 1px dashed var(--line);
+  border-radius: 14px;
+  color: var(--muted);
+}
+.looks .sample-note {
+  display: block;
+  width: fit-content;
+  max-width: calc(100% - 2 * var(--m));
+  margin: 2rem var(--m) 0;
+}
