@@ -48,6 +48,8 @@ export default function Looks() {
     mm.add("(min-width: 901px)", () => {
       if (isCalm()) return;
       sec.classList.add("pinmode");
+      // while the row travels with the page scroll it is not a scroller, so it should not be a tab stop
+      el.removeAttribute("tabindex");
       const far = () => Math.max(0, el.scrollWidth - window.innerWidth);
       gsap.to(el, {
         x: () => -far(),
@@ -62,7 +64,10 @@ export default function Looks() {
           refreshPriority: 1,
         },
       });
-      return () => sec.classList.remove("pinmode");
+      return () => {
+        sec.classList.remove("pinmode");
+        el.tabIndex = 0;
+      };
     });
 
     return () => {
