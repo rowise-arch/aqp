@@ -42,7 +42,8 @@ export default function Cursor() {
       gsap.to(r, {
         width: on ? 80 : 20,
         height: on ? 80 : 20,
-        backgroundColor: on ? "rgba(198, 167, 94, 0.15)" : "rgba(198, 167, 94, 0.4)",
+        // GSAP tweens plain rgba only, so this one value mirrors --accent (#c9a75a)
+        backgroundColor: on ? "rgba(201, 167, 90, 0.15)" : "rgba(201, 167, 90, 0.4)",
         borderWidth: on ? 1 : 0,
         duration: 0.35,
         ease: "power3.out",

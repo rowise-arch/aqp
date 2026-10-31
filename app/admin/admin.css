@@ -70,7 +70,7 @@
 .a-btn.ghost {
   background: transparent;
   color: var(--ink);
-  border-color: rgba(245, 242, 234, 0.3);
+  border-color: color-mix(in srgb, var(--ink) 30%, transparent);
 }
 .a-btn:disabled {
   opacity: 0.5;
@@ -87,11 +87,11 @@
   text-underline-offset: 4px;
 }
 .a-error {
-  color: #f0a99a;
+  color: var(--error);
   font-weight: 500;
 }
 .a-ok {
-  color: #a9d6a0;
+  color: var(--ok);
   font-weight: 500;
 }
 .form-foot {
@@ -144,7 +144,7 @@
   padding: 10px 12px;
   background: var(--bg);
   color: var(--ink);
-  border: 1px solid rgba(245, 242, 234, 0.25);
+  border: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
   border-radius: 0;
   font: 400 1rem/1.4 var(--font-sans), system-ui, sans-serif;
 }
@@ -206,7 +206,7 @@
   border-left-color: var(--accent);
 }
 .bk .st-confirmed {
-  border-left-color: #a9d6a0;
+  border-left-color: var(--ok);
 }
 .bk .st-cancelled,
 .bk .st-done {

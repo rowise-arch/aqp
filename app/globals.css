@@ -13,7 +13,9 @@
   --accent: #c9a75a;
   --accent-hi: #ddbf78;
   --accent-ink: #0e0e0e;
-  --line: rgba(201, 167, 90, 0.22);
+  --line: color-mix(in srgb, var(--accent) 22%, transparent);
+  --error: #f0a99a;
+  --ok: #a9d6a0;
 
   --m: clamp(20px, 4vw, 64px); /* the one pair of page margins */
   --bar: 76px;
@@ -206,7 +208,7 @@ h2 em {
   min-height: 56px;
   padding: 0 40px;
   overflow: hidden;
-  border: 1px solid rgba(245, 242, 234, 0.3);
+  border: 1px solid color-mix(in srgb, var(--ink) 30%, transparent);
   text-decoration: none;
   font-size: var(--step-label);
   font-weight: 600;
@@ -265,7 +267,7 @@ h2 em {
 }
 .bar.scrolled {
   height: 64px;
-  background: rgba(14, 14, 14, 0.82);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
   backdrop-filter: blur(14px);
 }
 .bar .brand {
@@ -397,7 +399,7 @@ h2 em {
   pointer-events: none;
 }
 .hero::before {
-  background: radial-gradient(circle at center, rgba(198, 167, 94, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle at center, color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 70%);
 }
 .hero::after {
   background: radial-gradient(circle at center, transparent 0%, var(--bg) 100%);
@@ -715,7 +717,7 @@ h2 em {
   gap: 40px;
   padding: 140px var(--m);
   text-align: center;
-  color: rgba(198, 167, 94, 0.55);
+  color: color-mix(in srgb, var(--accent) 55%, transparent);
 }
 .overture .mirror {
   width: min(70vw, 420px);
@@ -751,7 +753,7 @@ h2 em {
 .overture .facts .tick {
   width: 32px;
   height: 1px;
-  background: rgba(198, 167, 94, 0.5);
+  background: color-mix(in srgb, var(--accent) 50%, transparent);
   margin-bottom: 6px;
 }
 .overture .facts .v {
@@ -906,7 +908,7 @@ html.motion .overture .facts li[data-side="r"] {
   grid-template-columns: 44% 36% 1fr;
   align-items: baseline;
   padding: 14px 0;
-  border-bottom: 1px solid rgba(245, 242, 234, 0.08);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 8%, transparent);
   transition: color 0.3s var(--ease), padding-left 0.4s var(--ease);
 }
 .menu .rows li:hover {
@@ -1167,7 +1169,7 @@ html.motion .overture .facts li[data-side="r"] {
   accent-color: var(--accent);
 }
 .field-error {
-  color: #f0a99a;
+  color: var(--error);
   font-size: var(--step-small);
   font-weight: 500;
 }
@@ -1283,7 +1285,7 @@ html.motion .overture .facts li[data-side="r"] {
 }
 .visit .maplink {
   text-decoration: underline;
-  text-decoration-color: rgba(198, 167, 94, 0.5);
+  text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
   text-underline-offset: 4px;
 }
 .visit .map iframe {
@@ -1628,8 +1630,8 @@ html.motion .overture .facts li[data-side="r"] {
     z-index: 9999;
     width: 20px;
     height: 20px;
-    background: rgba(198, 167, 94, 0.4);
-    border: 0 solid rgba(198, 167, 94, 0.8);
+    background: color-mix(in srgb, var(--accent) 40%, transparent);
+    border: 0 solid color-mix(in srgb, var(--accent) 80%, transparent);
     mix-blend-mode: difference;
   }
   .cursor-dot {
@@ -1646,7 +1648,7 @@ html.motion .overture .facts li[data-side="r"] {
   align-items: center;
   min-height: 44px;
   text-decoration: underline;
-  text-decoration-color: rgba(198, 167, 94, 0.5);
+  text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
   text-underline-offset: 4px;
 }
 
