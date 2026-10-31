@@ -3,7 +3,8 @@ import { customerReceipt, sendEmail, studioNotice } from "@/lib/email";
 import { slotsFor } from "@/lib/schedule";
 import { loadSiteData } from "@/lib/site-data";
 
-// Best-effort limit per visitor. Serverless instances do not share memory, so this only slows a casual flood.
+// First line of defence, per visitor. Serverless instances do not share memory, so this only slows a casual flood;
+// the limits that always hold (per phone number, site-wide, capacity) read the saved bookings further down.
 const hits = new Map<string, number[]>();
 const limited = (ip: string) => {
   const now = Date.now();
@@ -56,6 +57,24 @@ export async function POST(request: Request) {
   const db = getDb();
   if (!db) return Response.json({ ok: true, demo: true });
 
+  // Limits that hold across all server instances, because they read the saved bookings.
+  const since = new Date(Date.now() - 24 * 3600_000).toISOString();
+  const { data: recent, error: recentError } = await db
+    .from("bookings")
+    .select("phone, date, time, created_at")
+    .gte("created_at", since)
+    .neq("status", "cancelled")
+    .limit(500);
+  if (recentError) return bad("Something went wrong on our side. Please call us.", 500);
+  const key = (v: string) => v.replace(/\D/g, "").slice(-9);
+  const mine = (recent ?? []).filter((r) => key(r.phone) === key(phone));
+  if (mine.some((r) => r.date === date && r.time === time)) return bad("We already have a request from this number for that time. We will message you to confirm.", 409);
+  if (mine.length >= 3) return bad("There are already a few requests from this number today. Please call us to add more.", 429);
+  const lastHour = Date.now() - 3600_000;
+  if ((recent ?? []).filter((r) => new Date(r.created_at).getTime() > lastHour).length >= 30) {
+    return bad("Online booking is very busy right now. Please call us to book.", 429);
+  }
+
   const { count, error: countError } = await db
     .from("bookings")
     .select("id", { count: "exact", head: true })
@@ -66,10 +85,25 @@ export async function POST(request: Request) {
   if ((count ?? 0) >= site.hours.capacity) return bad("Sorry, that time was just taken. Please pick another.", 409);
 
   const row = { name, phone, email: email || null, note: note || null, home_service: home, service_ids: chosen.map((s) => s.id), service_names, total, date, time };
-  const { error } = await db.from("bookings").insert(row);
-  if (error) {
+  const { data: saved, error } = await db.from("bookings").insert(row).select("id").single();
+  if (error || !saved) {
     console.error("booking insert failed", error);
     return bad("Something went wrong on our side. Please call us.", 500);
+  }
+
+  // Two people can pass the check above at the same moment. Count again now that this one is saved;
+  // if the time is over capacity, the later request gives its place up.
+  const { data: same } = await db
+    .from("bookings")
+    .select("id, created_at")
+    .eq("date", date)
+    .eq("time", time)
+    .neq("status", "cancelled")
+    .order("created_at")
+    .order("id");
+  if (same && same.length > site.hours.capacity && !same.slice(0, site.hours.capacity).some((r) => r.id === saved.id)) {
+    await db.from("bookings").delete().eq("id", saved.id);
+    return bad("Sorry, that time was just taken. Please pick another.", 409);
   }
 
   // The booking is saved; a failed email must never turn that into an error for the visitor.
