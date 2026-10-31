@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { isCalm } from "@/lib/calm";
 
 // The studio reel: a muted, silent loop that plays only while it is on screen.
 // It autoplays even when the system asks for reduced motion (it is a quiet loop, and the visitor
@@ -8,11 +9,12 @@ import { useEffect, useRef, useState } from "react";
 export default function Reel() {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
-  const wanted = useRef(true); // false once the visitor has paused it themselves
+  const wanted = useRef(true); // false once the visitor has paused it themselves, or chose calm motion
 
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
+    if (isCalm()) wanted.current = false;
     const io = new IntersectionObserver(
       ([e]) => {
         if (e.isIntersecting && wanted.current) v.play().catch(() => {});

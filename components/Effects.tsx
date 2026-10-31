@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import Logo from "./Logo";
+import { isCalm } from "@/lib/calm";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,7 +14,9 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Effects() {
   useEffect(() => {
     const pre = document.querySelector<HTMLElement>(".preloader");
-    const seen = sessionStorage.getItem("aqp-seen") === "1";
+    const calm = isCalm();
+    const seen = calm || sessionStorage.getItem("aqp-seen") === "1";
+    if (calm) document.documentElement.classList.add("calm");
     let lenis: Lenis | null = null;
     let tick: ((t: number) => void) | null = null;
     let ro: ResizeObserver | null = null;
@@ -22,6 +25,10 @@ export default function Effects() {
     const ctx = gsap.context(() => {
       /* ───── Hero entrance, run once the preloader is done ───── */
       const heroIn = () => {
+        if (calm) {
+          gsap.from([".bar", ".hero .eyebrow", ".hero .what", ".hero .cta", "[data-hero]", ".dial .mark"], { opacity: 0, duration: 0.5, stagger: 0.05 });
+          return;
+        }
         const E = "expo.out";
         gsap.from(".bar", { opacity: 0, y: -16, duration: 0.9, ease: "power3.out" });
         gsap.from(".hero .eyebrow", { opacity: 0, y: -20, duration: 1, ease: E });
@@ -35,7 +42,7 @@ export default function Effects() {
         gsap.fromTo(
           ".dial .mark",
           { filter: "brightness(1)" },
-          { filter: "brightness(1.25)", duration: 3, yoyo: true, repeat: -1, ease: "sine.inOut", delay: 3 },
+          { filter: "brightness(1.25)", duration: 2.2, yoyo: true, repeat: 1, ease: "sine.inOut", delay: 3 },
         );
       };
 
@@ -60,10 +67,10 @@ export default function Effects() {
 
       // All motion runs whatever the system setting says: many Windows PCs report reduced motion by
       // default, and this demo is meant to be seen with its animation.
-      document.documentElement.classList.add("motion");
+      if (!calm) document.documentElement.classList.add("motion");
 
       /* ───── Smooth scroll ───── */
-      {
+      if (!calm) {
         lenis = new Lenis({
           duration: 1.6,
           wheelMultiplier: 1,
@@ -96,7 +103,11 @@ export default function Effects() {
           const shown = entries.filter((e) => e.isIntersecting).map((e) => e.target);
           shown.forEach((el, i) => {
             io?.unobserve(el);
-            gsap.fromTo(el, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.8, ease: "expo.out", delay: i * 0.12, overwrite: true });
+            gsap.fromTo(
+              el,
+              { opacity: 0, y: calm ? 0 : 24 },
+              { opacity: 1, y: 0, duration: calm ? 0.4 : 0.8, ease: "expo.out", delay: calm ? 0 : i * 0.12, overwrite: true },
+            );
           });
         },
         { rootMargin: "0px" },
@@ -104,7 +115,7 @@ export default function Effects() {
       targets.forEach((el) => io?.observe(el));
 
       /* ───── Category panels grow and brighten as they arrive ───── */
-      gsap.utils.toArray<HTMLElement>(".cat").forEach((cat) => {
+      if (!calm) gsap.utils.toArray<HTMLElement>(".cat").forEach((cat) => {
         gsap.fromTo(
           cat,
           { scale: 0.95, opacity: 0.3 },
@@ -114,7 +125,7 @@ export default function Effects() {
 
       /* ───── The monogram: pinned; scale, turn and fade follow the scroll, facts arrive around it ───── */
       const ov = document.querySelector<HTMLElement>(".overture");
-      if (ov) {
+      if (ov && !calm) {
         const ring = ov.querySelector("[data-ring]");
         const l1 = ov.querySelector("[data-line1]");
         const l2 = ov.querySelector("[data-line2]");
@@ -137,7 +148,7 @@ export default function Effects() {
       }
 
       /* ───── Category panels: the picture drifts slowly inside its frame ───── */
-      gsap.utils.toArray<HTMLElement>("[data-panel]").forEach((panel) => {
+      if (!calm) gsap.utils.toArray<HTMLElement>("[data-panel]").forEach((panel) => {
         const img = panel.querySelector("img");
         if (!img) return;
         gsap.fromTo(
@@ -156,7 +167,7 @@ export default function Effects() {
       ctx.revert();
       if (tick) gsap.ticker.remove(tick);
       lenis?.destroy();
-      document.documentElement.classList.remove("motion");
+      document.documentElement.classList.remove("motion", "calm");
       ro?.disconnect();
       io?.disconnect();
     };

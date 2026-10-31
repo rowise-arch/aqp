@@ -1672,3 +1672,19 @@ html.motion .overture .facts li[data-side="r"] {
   max-width: calc(100% - 2 * var(--m));
   margin: 2rem var(--m) 0;
 }
+
+.calm-toggle {
+  min-height: 44px;
+  padding: 0 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+.calm-toggle:hover {
+  color: var(--ink);
+}
+html.calm {
+  scroll-behavior: auto;
+}

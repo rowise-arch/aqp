@@ -1,4 +1,5 @@
 import { studio } from "@/lib/content";
+import CalmToggle from "./CalmToggle";
 import MapLink from "./MapLink";
 
 export default function Footer() {
@@ -60,6 +61,7 @@ export default function Footer() {
       <p className="legal small muted">
         © AQP Beauty Studio. Demo: photographs from Pexels, team and bios are samples.
       </p>
+      <CalmToggle />
     </footer>
   );
 }

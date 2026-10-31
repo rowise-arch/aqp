@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { strip } from "@/lib/content";
 import SampleNote from "./SampleNote";
+import { isCalm } from "@/lib/calm";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,6 +46,7 @@ export default function Looks() {
 
     const mm = gsap.matchMedia();
     mm.add("(min-width: 901px)", () => {
+      if (isCalm()) return;
       sec.classList.add("pinmode");
       const far = () => Math.max(0, el.scrollWidth - window.innerWidth);
       gsap.to(el, {
