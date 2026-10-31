@@ -1,6 +1,7 @@
 import { requireAdmin } from "@/lib/auth";
 import { WEEKDAYS } from "@/lib/schedule";
 import { loadSiteData } from "@/lib/site-data";
+import ConfirmButton from "@/components/ConfirmButton";
 import { addClosedDate, removeClosedDate, saveHours } from "../actions";
 import { ActionForm } from "../forms";
 
@@ -90,9 +91,9 @@ export default async function HoursPage() {
               </span>
               <form action={removeClosedDate}>
                 <input type="hidden" name="date" value={c.date} />
-                <button className="a-link" type="submit">
+                <ConfirmButton className="a-link" message={`Remove this closed day? Online booking will open again for ${c.date}.`}>
                   Remove
-                </button>
+                </ConfirmButton>
               </form>
             </li>
           ))}

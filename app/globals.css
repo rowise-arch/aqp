@@ -28,6 +28,13 @@
   --step-display: clamp(3.5rem, 1.5rem + 7.4vw, 8.5rem);
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* one layering scale: content 1-2, menu sheet, header, preloader, skip link, cursor */
+  --z-sheet: 49;
+  --z-bar: 50;
+  --z-preloader: 100;
+  --z-skip: 200;
+  --z-cursor: 300;
 }
 
 @theme inline {
@@ -240,7 +247,7 @@ h2 em {
 .preloader {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: var(--z-preloader);
   display: grid;
   place-items: center;
   background: var(--bg);
@@ -254,7 +261,7 @@ h2 em {
 .bar {
   position: fixed;
   inset: 0 0 auto 0;
-  z-index: 50;
+  z-index: var(--z-bar);
   height: var(--bar);
   padding: 0 var(--m);
   display: grid;
@@ -330,7 +337,7 @@ h2 em {
 .sheet {
   position: fixed;
   inset: var(--bar) 0 auto 0;
-  z-index: 49;
+  z-index: var(--z-sheet);
   display: grid;
   padding: 12px var(--m) 32px;
   background: var(--bg);
@@ -350,7 +357,7 @@ h2 em {
   position: fixed;
   top: 8px;
   left: 8px;
-  z-index: 200;
+  z-index: var(--z-skip);
   padding: 12px 18px;
   background: var(--accent);
   color: var(--accent-ink);
@@ -1627,7 +1634,7 @@ html.motion .overture .facts li[data-side="r"] {
     opacity: 0;
   }
   .cursor-ring {
-    z-index: 9999;
+    z-index: var(--z-cursor);
     width: 20px;
     height: 20px;
     background: color-mix(in srgb, var(--accent) 40%, transparent);
@@ -1635,7 +1642,7 @@ html.motion .overture .facts li[data-side="r"] {
     mix-blend-mode: difference;
   }
   .cursor-dot {
-    z-index: 10000;
+    z-index: calc(var(--z-cursor) + 1);
     width: 8px;
     height: 8px;
     background: var(--accent);
@@ -1721,4 +1728,26 @@ html.calm .step-in {
 }
 .visit .map-load:hover {
   border-color: var(--accent);
+}
+
+/* Touch: no tap delay, and a visible press on every tappable control */
+a,
+button,
+summary,
+label,
+input,
+select {
+  touch-action: manipulation;
+}
+.tabs button:active,
+.pick button:active,
+.days button:active,
+.times button:active,
+.nav-row button:active,
+.arrows button:active {
+  transform: scale(0.97);
+  transition: transform 0.1s var(--ease);
+}
+.a-btn:active {
+  transform: scale(0.98);
 }

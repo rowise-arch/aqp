@@ -1,3 +1,4 @@
+import ConfirmButton from "@/components/ConfirmButton";
 import { groups } from "@/lib/content";
 import { requireAdmin } from "@/lib/auth";
 import { getDb } from "@/lib/db";
@@ -90,9 +91,9 @@ export default async function ServicesPage() {
                   </ActionForm>
                   <form action={deleteService}>
                     <input type="hidden" name="id" value={r.id} />
-                    <button className="a-link" type="submit">
+                    <ConfirmButton className="a-link" message={`Delete ${r.name}${r.variant ? ` (${r.variant})` : ""}? This cannot be undone. To hide it from the site instead, untick Shown.`}>
                       Delete
-                    </button>
+                    </ConfirmButton>
                   </form>
                 </li>
               ))}

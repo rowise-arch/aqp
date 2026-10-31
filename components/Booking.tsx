@@ -123,7 +123,13 @@ export default function Booking({ services, hours }: { services: Service[]; hour
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setTouched({ name: true, phone: true, email: true });
-    if (!canNext || sending) return;
+    if (!canNext) {
+      // send keyboard and screen-reader users to the first field that needs attention
+      const bad = !nameOk ? "name" : !phoneOk ? "tel" : "email";
+      (e.currentTarget as HTMLFormElement).querySelector<HTMLInputElement>(`input[autocomplete="${bad}"]`)?.focus();
+      return;
+    }
+    if (sending) return;
     setSending(true);
     setFailure("");
     try {
