@@ -1,0 +1,24 @@
+# Pings the live site every few days so Supabase's free plan does not pause the project for inactivity.
+# Setup: GitHub repo -> Settings -> Secrets and variables -> Actions -> Variables -> New repository variable
+#   Name: SITE_URL     Value: https://your-site.vercel.app   (no trailing slash)
+name: Keep Supabase awake
+
+on:
+  schedule:
+    - cron: "17 3 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the availability endpoint (it reads the database)
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: |
+          if [ -z "$SITE_URL" ]; then
+            echo "SITE_URL is not set. Add it under Settings, Secrets and variables, Actions, Variables."
+            exit 1
+          fi
+          curl --fail --silent --show-error --max-time 30 "$SITE_URL/api/availability?date=2000-01-01"
+          echo

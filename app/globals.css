@@ -271,6 +271,8 @@ h2 em {
 .bar .brand {
   display: flex;
   align-items: center;
+  min-height: 44px;
+  min-width: 44px;
   gap: 14px;
   justify-self: start;
   text-decoration: none;
@@ -1024,6 +1026,8 @@ html.motion .overture .facts li[data-side="r"] {
 .tabs button {
   background: none;
   border: 0;
+  min-height: 44px;
+  min-width: 44px;
   padding: 8px 0;
   color: var(--muted);
   font: 400 var(--step-body) var(--font-display), Georgia, serif;
@@ -1389,12 +1393,15 @@ html.motion .overture .facts li[data-side="r"] {
 }
 .footer ul {
   display: grid;
-  gap: 4px;
+  gap: 0;
 }
 .footer .cols a,
 .footer .legal a {
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  min-width: 44px;
   padding: 4px 0;
   transition: color 0.3s var(--ease);
 }
@@ -1631,4 +1638,21 @@ html.motion .overture .facts li[data-side="r"] {
     height: 8px;
     background: var(--accent);
   }
+}
+
+.footer .maplink,
+.visit .maplink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-decoration-color: rgba(198, 167, 94, 0.5);
+  text-underline-offset: 4px;
+}
+
+/* links inside the "Prefer to talk?" sentence: a 44px hit area that does not move the text */
+.book .alt a {
+  display: inline-block;
+  padding: 12px 6px;
+  margin: -12px -6px;
 }

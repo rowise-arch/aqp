@@ -107,7 +107,7 @@ export default function Looks() {
               height={photo.h}
               alt={photo.alt}
               sizes="(max-width: 900px) 72vw, 26vw"
-              priority={i < 3}
+              loading={i < 3 ? "eager" : "lazy"}
               draggable={false}
             />
             <div className="cap">

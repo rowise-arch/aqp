@@ -164,7 +164,7 @@ export default function Effects() {
 
   return (
     <div className="preloader" aria-hidden="true">
-      <Logo title="" />
+      <Logo title="" sizes="170px" />
     </div>
   );
 }

@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
       <div className="dial" aria-hidden="true">
-        <Image className="mark" src="/brand/aqp-monogram.jpg" alt="" width={1600} height={1600} priority sizes="(max-width: 900px) 150vw, 1280px" />
+        <Image className="mark" src="/brand/aqp-monogram.jpg" alt="" width={1600} height={1600} loading="eager" fetchPriority="high" sizes="(max-width: 900px) 150vw, 1280px" />
       </div>
 
       <div className="hero-body">
