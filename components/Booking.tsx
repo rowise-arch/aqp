@@ -11,6 +11,7 @@ const TABS: { label: string; match: (s: Service) => boolean }[] = [
   { label: "Hair treatments", match: (s) => s.group === "Hair" && !/haircut|shampoo|ironing|curling|colour|bleach|highlights|balayage/i.test(s.name) },
   { label: "Nails", match: (s) => s.group === "Nails" },
   { label: "Brows, lashes and waxing", match: (s) => s.group === "Brows, lashes & waxing" },
+  { label: "Make up", match: (s) => s.group === "Makeup" },
 ];
 
 const STEPS = ["Services", "Date and time", "Your details"] as const;

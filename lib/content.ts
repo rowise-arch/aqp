@@ -14,7 +14,7 @@ export const studio = {
   notes: ["Home service and after-office appointments, booked ahead."],
 };
 
-export type Group = "Hair" | "Nails" | "Brows, lashes & waxing";
+export type Group = "Hair" | "Nails" | "Brows, lashes & waxing" | "Makeup";
 
 export type Service = {
   id: string;
@@ -41,6 +41,7 @@ const s = (
 const H: Group = "Hair";
 const N: Group = "Nails";
 const B: Group = "Brows, lashes & waxing";
+const M: Group = "Makeup";
 
 export const services: Service[] = [
   s(H, "Men's haircut", 150, "Basic"),
@@ -86,18 +87,20 @@ export const services: Service[] = [
   s(N, "Nail extension removal", 250),
   s(N, "Foot spa", 500),
   s(N, "Foot massage", 200),
-  s(B, "Eyebrow shaving", 60),
-  s(B, "Eyebrow threading", 120),
+  s(B, "Eyebrow shaving", 100),
+  s(B, "Eyebrow threading", 150),
   s(B, "Waxing", 150, "Upper and lower lip"),
-  s(B, "Waxing", 200, "Underarm"),
-  s(B, "Waxing", 250, "Legs"),
-  s(B, "Waxing", 400, "Full legs"),
-  s(B, "Eyelash extension", 500, "Medium"),
+  s(B, "Waxing", 250, "Underarm"),
+  s(B, "Waxing", 300, "Legs"),
+  s(B, "Waxing", 500, "Full legs"),
+  s(B, "Eyelash extension", 400, "Medium"),
   s(B, "Eyelash extension", 600, "Full"),
-  s(B, "Eyelash extension removal", 100),
+  s(B, "Eyelash extension removal", 150),
+  s(M, "Commercial hair and make up", 1000),
+  s(M, "Progressive evening hair and make up", 1500),
 ];
 
-export const groups: Group[] = ["Hair", "Nails", "Brows, lashes & waxing"];
+export const groups: Group[] = ["Hair", "Nails", "Brows, lashes & waxing", "Makeup"];
 
 export const peso = (v: number) => `₱${v.toLocaleString("en-PH")}`;
 
@@ -276,10 +279,10 @@ export function buildCategories(list: Service[]) {
     {
       id: "events",
       title: "Events and bridal",
-      tag: "Quoted per booking",
-      line: "Hair and makeup for weddings, debuts and nights out. Tell us the date and we plan the look.",
-      cta: "Request a quote",
-      href: "#book",
+      tag: `From ${peso(from("Makeup"))}`,
+      line: "Hair and makeup for shoots, weddings, debuts and nights out. Bridal looks are planned with you, so tell us the date.",
+      cta: "See make up prices",
+      href: "#services-makeup",
       photo: photos.bwMakeup,
     },
   ];

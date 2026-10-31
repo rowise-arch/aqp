@@ -5,6 +5,7 @@ const aside: Record<Group, typeof photos.braid> = {
   Hair: photos.scissors,
   Nails: photos.nailsGold,
   "Brows, lashes & waxing": photos.brow,
+  Makeup: photos.bwMakeup,
 };
 
 export default function Menu({ services }: { services: Service[] }) {
@@ -40,7 +41,7 @@ export default function Menu({ services }: { services: Service[] }) {
       ))}
 
       <div className="fine small">
-        <p>Bridal and event hair and makeup are quoted for each booking. Tell us the date and the look.</p>
+        <p>Full bridal looks are planned and quoted with you. Tell us the date and the look when you book.</p>
         <p>We accept {studio.payments}.</p>
       </div>
     </section>

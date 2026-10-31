@@ -4,7 +4,7 @@
 
 create table if not exists services (
   id       text primary key,
-  grp      text not null check (grp in ('Hair', 'Nails', 'Brows, lashes & waxing')),
+  grp      text not null check (grp in ('Hair', 'Nails', 'Brows, lashes & waxing', 'Makeup')),
   name     text not null,
   variant  text,
   price    integer not null check (price >= 0),
