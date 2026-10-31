@@ -11,8 +11,12 @@ import Overture from "@/components/Overture";
 import Team from "@/components/Team";
 import Booking from "@/components/Booking";
 import Footer from "@/components/Footer";
+import Faq from "@/components/Faq";
+import Visit from "@/components/Visit";
+import { getSiteData } from "@/lib/site-data";
 
-export default function Home() {
+export default async function Home() {
+  const site = await getSiteData();
   return (
     <>
       <Effects />
@@ -22,12 +26,14 @@ export default function Home() {
         <Hero />
         <Looks />
         <Intro />
-        <Categories />
-        <Overture />
-        <Menu />
+        <Categories services={site.services} />
+        <Overture services={site.services} />
+        <Menu services={site.services} />
         <Reel />
         <Team />
-        <Booking />
+        <Booking services={site.services} hours={site.hours} />
+        <Visit hours={site.hours} policy={site.policy} reviews={site.reviews} />
+        <Faq items={site.faq} />
       </main>
       <Footer />
     </>

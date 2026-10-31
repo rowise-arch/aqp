@@ -1,0 +1,326 @@
+/* The studio admin: plain, quiet and readable. It borrows the site's colours and type. */
+.admin {
+  min-height: 100svh;
+  padding: 0 var(--m) 96px;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.admin h1 {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin: 40px 0 8px;
+}
+.admin h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 1.5rem;
+  margin: 48px 0 8px;
+}
+.admin p {
+  max-width: 68ch;
+}
+.a-muted {
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+.a-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 32px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+.a-head nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  flex: 1;
+}
+.a-head a,
+.a-head form {
+  font-size: 0.9375rem;
+}
+.a-head a {
+  padding: 8px 0;
+  color: var(--soft);
+  text-decoration: none;
+}
+.a-head a:hover {
+  color: var(--accent);
+}
+.a-head .who {
+  margin-right: 12px;
+  color: var(--muted);
+}
+.a-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 24px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: 600 0.8125rem/1 var(--font-sans), system-ui, sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.a-btn.ghost {
+  background: transparent;
+  color: var(--ink);
+  border-color: rgba(245, 242, 234, 0.3);
+}
+.a-btn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+.a-link {
+  background: none;
+  border: 0;
+  padding: 8px 0;
+  color: var(--accent);
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.a-error {
+  color: #f0a99a;
+  font-weight: 500;
+}
+.a-ok {
+  color: #a9d6a0;
+  font-weight: 500;
+}
+.form-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+  width: 100%;
+}
+.form-foot p {
+  margin: 0;
+}
+
+.a-card {
+  margin-top: 20px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.a-stack {
+  display: grid;
+  gap: 20px;
+  max-width: 760px;
+}
+.a-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+}
+.a-row.compact {
+  gap: 12px;
+}
+.admin label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.admin input[type="text"],
+.admin input[type="email"],
+.admin input[type="password"],
+.admin input[type="number"],
+.admin input[type="time"],
+.admin input[type="date"],
+.admin select,
+.admin textarea {
+  min-height: 44px;
+  padding: 10px 12px;
+  background: var(--bg);
+  color: var(--ink);
+  border: 1px solid rgba(245, 242, 234, 0.25);
+  border-radius: 0;
+  font: 400 1rem/1.4 var(--font-sans), system-ui, sans-serif;
+}
+.admin input:focus,
+.admin select:focus,
+.admin textarea:focus,
+.admin button:focus-visible,
+.admin a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.admin input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--accent);
+}
+.admin .check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: var(--ink);
+}
+
+.a-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 24px 0;
+}
+.a-tabs a {
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  color: var(--soft);
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+.a-tabs a[aria-current="page"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.bk {
+  display: grid;
+  gap: 12px;
+}
+.bk li {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) minmax(180px, 1.2fr) minmax(220px, 2fr) auto;
+  gap: 16px 32px;
+  align-items: start;
+  padding: 20px 24px;
+  border: 1px solid var(--line);
+  border-left-width: 4px;
+  background: var(--surface-2);
+}
+.bk .st-pending {
+  border-left-color: var(--accent);
+}
+.bk .st-confirmed {
+  border-left-color: #a9d6a0;
+}
+.bk .st-cancelled,
+.bk .st-done {
+  opacity: 0.7;
+}
+.bk .when,
+.bk .who,
+.bk .what {
+  display: grid;
+  gap: 4px;
+}
+.bk a {
+  color: var(--soft);
+}
+.bk .total {
+  font-weight: 600;
+}
+.bk .note {
+  color: var(--muted);
+  font-style: italic;
+}
+.bk .acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.badge {
+  justify-self: start;
+  padding: 2px 10px;
+  border: 1px solid var(--line);
+  font-size: 0.8125rem;
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hrs {
+  width: 100%;
+  max-width: 560px;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+.hrs th,
+.hrs td {
+  padding: 8px 12px 8px 0;
+  text-align: left;
+  font-weight: 400;
+}
+.hrs thead th {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.a-list {
+  display: grid;
+  gap: 4px;
+  margin-top: 16px;
+  max-width: 560px;
+}
+.a-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+.svc {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+.svc li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--line);
+}
+.svc input[name="name"] {
+  min-width: 220px;
+}
+.svc input[name="price"],
+.svc input[name="sort"] {
+  width: 96px;
+}
+
+.login {
+  max-width: 420px;
+  margin: 14svh auto 0;
+}
+.login-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 24px;
+}
+.setup {
+  margin-top: 16px;
+  color: var(--soft);
+  display: grid;
+  gap: 12px;
+}
+.setup ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 20px;
+  list-style: disc;
+}
+.setup code {
+  color: var(--accent);
+}
+
+@media (max-width: 900px) {
+  .bk li {
+    grid-template-columns: 1fr;
+  }
+}

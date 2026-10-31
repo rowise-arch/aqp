@@ -16,7 +16,14 @@ const sans = Inter({
   display: "swap",
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  ? process.env.NEXT_PUBLIC_SITE_URL
+  : process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "AQP Beauty Studio | Hair, nails and makeup in Odiongan",
   description:
     "Hair colour, balayage, nails, lashes and bridal makeup in Odiongan. See the full price list and book online.",

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { groups, peso, photos, services, studio, type Group } from "@/lib/content";
+import { groups, peso, photos, studio, type Group, type Service } from "@/lib/content";
 
 const aside: Record<Group, typeof photos.braid> = {
   Hair: photos.scissors,
@@ -7,7 +7,7 @@ const aside: Record<Group, typeof photos.braid> = {
   "Brows, lashes & waxing": photos.brow,
 };
 
-export default function Menu() {
+export default function Menu({ services }: { services: Service[] }) {
   return (
     <section className="menu" id="services" aria-labelledby="menu-title">
       <p className="label" data-reveal>

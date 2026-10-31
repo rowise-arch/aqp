@@ -1,20 +1,17 @@
 import Image from "next/image";
-import { services } from "@/lib/content";
+import type { Service } from "@/lib/content";
 
-const prices = services.map((s) => s.price);
-const low = Math.min(...prices);
-const high = Math.max(...prices);
 const fmt = (n: number) => `₱${n.toLocaleString("en-PH")}`;
 
-const facts = [
-  { label: "On the list", value: `${services.length} prices`, side: "l", y: -90 },
-  { label: "Starting at", value: fmt(low), side: "r", y: -90 },
-  { label: "Up to", value: fmt(high), side: "l", y: 100 },
-  { label: "Pay by", value: "GCash or bank", side: "r", y: 100 },
-];
-
 // The monogram turns, grows and fades as the page scrolls, with the price facts arriving around it.
-export default function Overture() {
+export default function Overture({ services }: { services: Service[] }) {
+  const prices = services.length ? services.map((s) => s.price) : [0];
+  const facts = [
+    { label: "On the list", value: `${services.length} prices`, side: "l", y: -90 },
+    { label: "Starting at", value: fmt(Math.min(...prices)), side: "r", y: -90 },
+    { label: "Up to", value: fmt(Math.max(...prices)), side: "l", y: 100 },
+    { label: "Pay by", value: "GCash or bank", side: "r", y: 100 },
+  ];
   return (
     <section className="overture" aria-labelledby="overture-title">
       <div className="stage">

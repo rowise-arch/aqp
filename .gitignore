@@ -43,3 +43,6 @@ next-env.d.ts
 # design tooling working files
 /.taste-skill/
 /.impeccable/
+
+# keep the template
+!.env.example

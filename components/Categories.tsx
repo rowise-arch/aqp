@@ -1,7 +1,9 @@
 import Image from "next/image";
-import { categories } from "@/lib/content";
+import { buildCategories } from "@/lib/content";
+import type { Service } from "@/lib/content";
 
-export default function Categories() {
+export default function Categories({ services }: { services: Service[] }) {
+  const categories = buildCategories(services);
   return (
     <section className="cats" aria-label="What we do">
       {categories.map((c, i) => (

@@ -1101,6 +1101,17 @@ html.motion .overture .facts li[data-side="r"] {
   font-size: var(--step-small);
   opacity: 0.8;
 }
+.days button:disabled,
+.times button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+.days .why,
+.times .why {
+  display: block;
+  font-size: var(--step-small);
+}
 .times {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
@@ -1123,6 +1134,7 @@ html.motion .overture .facts li[data-side="r"] {
 }
 .fields input[type="text"],
 .fields input[type="tel"],
+.fields input[type="email"],
 .fields textarea {
   background: var(--surface-2);
   color: var(--ink);
@@ -1149,6 +1161,18 @@ html.motion .overture .facts li[data-side="r"] {
   width: 22px;
   height: 22px;
   accent-color: var(--accent);
+}
+.field-error {
+  color: #f0a99a;
+  font-size: var(--step-small);
+  font-weight: 500;
+}
+.fields .hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 .nav-row {
   margin-top: 32px;
@@ -1204,6 +1228,122 @@ html.motion .overture .facts li[data-side="r"] {
 }
 .book .bh h2 {
   margin-top: 12px;
+}
+
+/* ───────── Visit and questions ───────── */
+.visit,
+.faq {
+  padding: 140px var(--m);
+  border-top: 1px solid var(--line);
+}
+.visit h2,
+.faq h2 {
+  margin: 12px 0 56px;
+  font-size: var(--step-head);
+}
+.visit-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 64px;
+  align-items: start;
+}
+.visit .info {
+  display: grid;
+  gap: 14px;
+}
+.visit h3 {
+  margin-top: 24px;
+  font-size: var(--step-small);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 600;
+}
+.visit h3:first-child {
+  margin-top: 0;
+}
+.hours {
+  display: grid;
+}
+.hours div {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+}
+.hours .off dd {
+  color: var(--muted);
+}
+.visit .maplink {
+  text-decoration: underline;
+  text-decoration-color: rgba(198, 167, 94, 0.5);
+  text-underline-offset: 4px;
+}
+.visit .map iframe {
+  width: 100%;
+  height: min(70svh, 560px);
+  min-height: 340px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  filter: grayscale(1) invert(0.92) contrast(0.9);
+}
+.reviews {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  margin-top: 96px;
+}
+.reviews blockquote {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--step-lead);
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.faq .qs {
+  max-width: 860px;
+  border-top: 1px solid var(--line);
+}
+.faq details {
+  border-bottom: 1px solid var(--line);
+}
+.faq summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: var(--step-lead);
+}
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+.faq summary::after {
+  content: "+";
+  color: var(--accent);
+  transition: transform 0.4s var(--ease);
+}
+.faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+.faq details p {
+  padding: 0 48px 28px 0;
+  max-width: 62ch;
+  color: var(--soft);
+}
+@media (max-width: 900px) {
+  .visit,
+  .faq {
+    padding: 100px var(--m);
+  }
+  .visit-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
 }
 
 /* ───────── Footer ───────── */
