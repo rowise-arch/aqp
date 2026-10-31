@@ -53,11 +53,15 @@ export default async function ServicesPage() {
       <h1>Services and prices</h1>
       <p className="a-muted">Changes show on the price list, the booking form and the section totals straight away. Untick “Shown” to hide a service without deleting it.</p>
 
-      {db && rows.length === 0 ? (
+      {db && groups.some((g) => !rows.some((r) => r.grp === g)) ? (
         <form action={importDefaultMenu} className="a-card">
-          <p>The menu is not in the database yet. Copy the studio&apos;s printed price list in, then edit it here.</p>
+          <p>
+            {rows.length === 0
+              ? "The price list is not in the database yet. Copy the studio's price list in, then edit it here."
+              : "Part of the price list is missing from the database, so the website is only showing what is here. Add the missing items back."}
+          </p>
           <button className="a-btn" type="submit">
-            Import the current price list
+            {rows.length === 0 ? "Import the current price list" : "Add the missing price-list items"}
           </button>
         </form>
       ) : null}

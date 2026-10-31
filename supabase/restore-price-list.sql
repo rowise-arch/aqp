@@ -1,0 +1,65 @@
+-- Adds every item of the current price list that is missing from the database. Safe to run twice:
+-- items that already exist (and any prices you edited in the admin) are left alone.
+
+alter table services drop constraint if exists services_grp_check;
+alter table services add constraint services_grp_check
+  check (grp in ('Hair', 'Nails', 'Brows, lashes & waxing', 'Makeup'));
+
+insert into services (id, grp, name, variant, price, sort, active) values
+  ('s1', 'Hair', 'Men''s haircut', 'Basic', 150, 0, true),
+  ('s2', 'Hair', 'Ladies'' haircut', 'With style', 150, 1, true),
+  ('s3', 'Hair', 'Shampoo and blowdry', 'Men', 200, 2, true),
+  ('s4', 'Hair', 'Shampoo and blowdry', 'Women', 350, 3, true),
+  ('s5', 'Hair', 'Hair ironing', 'Medium', 300, 4, true),
+  ('s6', 'Hair', 'Hair ironing', 'Long', 500, 5, true),
+  ('s7', 'Hair', 'Hair curling', null, 300, 6, true),
+  ('s8', 'Hair', 'Hair perm', 'Medium', 800, 7, true),
+  ('s9', 'Hair', 'Hair perm', 'Long', 1500, 8, true),
+  ('s10', 'Hair', 'Hair spa', null, 1000, 9, true),
+  ('s11', 'Hair', 'Conditioning treatment', 'Men', 500, 10, true),
+  ('s12', 'Hair', 'Conditioning treatment', 'Women', 800, 11, true),
+  ('s13', 'Hair', 'Premium colour, one shade', 'Men', 500, 12, true),
+  ('s14', 'Hair', 'Premium colour, one shade', 'Women, medium', 800, 13, true),
+  ('s15', 'Hair', 'Premium colour, one shade', 'Women, long', 1200, 14, true),
+  ('s16', 'Hair', 'Branded base colour', 'Men', 800, 15, true),
+  ('s17', 'Hair', 'Branded base colour', 'Women, medium', 1000, 16, true),
+  ('s18', 'Hair', 'Branded base colour', 'Women, long', 1500, 17, true),
+  ('s19', 'Hair', 'Full bleach', 'Men', 1200, 18, true),
+  ('s20', 'Hair', 'Highlights', 'Men', 1000, 19, true),
+  ('s21', 'Hair', 'Highlights', 'Women, medium', 1500, 20, true),
+  ('s22', 'Hair', 'Highlights', 'Women, long', 2000, 21, true),
+  ('s23', 'Hair', 'Balayage', 'Medium', 3500, 22, true),
+  ('s24', 'Hair', 'Balayage', 'Long', 4500, 23, true),
+  ('s25', 'Hair', 'Hair rebond', 'Men', 800, 24, true),
+  ('s26', 'Hair', 'Hair rebond', 'Women, medium', 1500, 25, true),
+  ('s27', 'Hair', 'Hair rebond', 'Women, long', 2000, 26, true),
+  ('s28', 'Hair', 'Brazilian blowout', 'Medium', 1000, 27, true),
+  ('s29', 'Hair', 'Brazilian blowout', 'Long', 1500, 28, true),
+  ('s30', 'Hair', 'Keratin treatment', 'Medium', 1500, 29, true),
+  ('s31', 'Hair', 'Keratin treatment', 'Long', 2000, 30, true),
+  ('s32', 'Hair', 'Kerabond treatment', 'Medium', 2000, 31, true),
+  ('s33', 'Hair', 'Kerabond treatment', 'Long', 2500, 32, true),
+  ('s34', 'Nails', 'Manicure', 'Basic cleaning', 100, 33, true),
+  ('s35', 'Nails', 'Pedicure', 'Basic cleaning', 120, 34, true),
+  ('s36', 'Nails', 'Pedicure', 'With ingrown removal', 150, 35, true),
+  ('s37', 'Nails', 'Gel polish', null, 400, 36, true),
+  ('s38', 'Nails', 'Gel polish removal', null, 100, 37, true),
+  ('s39', 'Nails', 'Nail extension', 'Basic design', 600, 38, true),
+  ('s40', 'Nails', 'Nail extension', 'Nail art inspo', 800, 39, true),
+  ('s41', 'Nails', 'Nail extension removal', null, 250, 40, true),
+  ('s42', 'Nails', 'Foot spa', null, 500, 41, true),
+  ('s43', 'Nails', 'Foot massage', null, 200, 42, true),
+  ('s44', 'Brows, lashes & waxing', 'Eyebrow shaving', null, 100, 43, true),
+  ('s45', 'Brows, lashes & waxing', 'Eyebrow threading', null, 150, 44, true),
+  ('s46', 'Brows, lashes & waxing', 'Waxing', 'Upper and lower lip', 150, 45, true),
+  ('s47', 'Brows, lashes & waxing', 'Waxing', 'Underarm', 250, 46, true),
+  ('s48', 'Brows, lashes & waxing', 'Waxing', 'Legs', 300, 47, true),
+  ('s49', 'Brows, lashes & waxing', 'Waxing', 'Full legs', 500, 48, true),
+  ('s50', 'Brows, lashes & waxing', 'Eyelash extension', 'Medium', 400, 49, true),
+  ('s51', 'Brows, lashes & waxing', 'Eyelash extension', 'Full', 600, 50, true),
+  ('s52', 'Brows, lashes & waxing', 'Eyelash extension removal', null, 150, 51, true),
+  ('s53', 'Makeup', 'Commercial hair and make up', null, 1000, 52, true),
+  ('s54', 'Makeup', 'Progressive evening hair and make up', null, 1500, 53, true)
+on conflict (id) do nothing;
+
+select grp, count(*) as items from services group by grp order by grp;

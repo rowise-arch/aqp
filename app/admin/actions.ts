@@ -166,13 +166,14 @@ export async function deleteService(form: FormData) {
   redirect("/admin/services");
 }
 
-/** Copies the studio's printed menu from the code into the database so it can be edited. */
+/**
+ * Copies the studio's price list from the code into the database so it can be edited.
+ * It only adds items that are missing, so it never overwrites prices already edited here.
+ */
 export async function importDefaultMenu() {
   await requireAdmin();
-  const d = db();
-  const { count } = await d.from("services").select("id", { count: "exact", head: true });
-  if ((count ?? 0) > 0) return;
-  await d.from("services").insert(defaultServices.map((s, i) => ({ id: s.id, grp: s.group, name: s.name, variant: s.variant ?? null, price: s.price, sort: i, active: true })));
+  const rows = defaultServices.map((s, i) => ({ id: s.id, grp: s.group, name: s.name, variant: s.variant ?? null, price: s.price, sort: i, active: true }));
+  await db().from("services").upsert(rows, { onConflict: "id", ignoreDuplicates: true });
   updateTag("site");
   redirect("/admin/services");
 }

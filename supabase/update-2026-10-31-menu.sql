@@ -1,6 +1,8 @@
 -- Run once in Supabase (SQL Editor -> New query -> paste -> Run) if you already imported the price list.
 -- It matches the studio's newer price list: six changed prices and two new make-up services.
 -- Safe to run twice.
+-- WARNING: only use this if the full price list is already in the database. If the services table was never
+-- imported, run restore-price-list.sql instead (it contains the new prices and all 54 items).
 
 -- 1. Allow a fourth group, "Makeup"
 alter table services drop constraint if exists services_grp_check;
