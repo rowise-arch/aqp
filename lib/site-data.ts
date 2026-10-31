@@ -90,10 +90,13 @@ export async function loadSiteData(): Promise<SiteData> {
   }
 }
 
-/** The public page's copy of the data. It is kept until the admin saves a change, which expires the "site" tag. */
+/**
+ * The public page's copy of the data. Saving in the admin expires the "site" tag at once. Edits made straight
+ * in the database (SQL editor, table editor) have no way to tell the site, so the copy also refreshes every 5 minutes.
+ */
 export async function getSiteData(): Promise<SiteData> {
   "use cache";
   cacheTag("site");
-  cacheLife("hours");
+  cacheLife({ stale: 300, revalidate: 300, expire: 3600 });
   return loadSiteData();
 }
