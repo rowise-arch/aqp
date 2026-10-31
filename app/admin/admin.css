@@ -324,3 +324,78 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Touch targets: every link and button is at least 44px tall */
+.a-head a,
+.a-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.bk .who a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+/* Phones: tighter, two-column service rows, hours that fit */
+@media (max-width: 600px) {
+  .admin {
+    padding-bottom: 64px;
+  }
+  .a-head nav {
+    flex-basis: 100%;
+    order: 3;
+    gap: 0 20px;
+  }
+  .a-card {
+    padding: 16px;
+  }
+  .a-row,
+  .a-row.compact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: end;
+  }
+  .a-row > label:nth-child(-n + 3) {
+    grid-column: 1 / -1;
+  }
+  .a-row .form-foot {
+    grid-column: 1 / -1;
+  }
+  .svc li {
+    padding: 12px;
+  }
+  .svc input[name="name"],
+  .svc input[name="price"],
+  .svc input[name="sort"],
+  .admin .a-row input:not([type="checkbox"]),
+  .admin .a-row select {
+    width: 100%;
+    min-width: 0;
+  }
+  .hrs th,
+  .hrs td {
+    padding-right: 6px;
+  }
+  .hrs input[type="time"] {
+    width: 100%;
+    min-width: 0;
+    padding: 10px 6px;
+  }
+  .a-btn {
+    padding: 0 18px;
+  }
+}
+
+.a-tabs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+@media (max-width: 600px) {
+  .a-row .check {
+    grid-column: 1 / -1;
+  }
+}
