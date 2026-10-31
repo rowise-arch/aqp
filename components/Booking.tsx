@@ -1,6 +1,7 @@
 "use client";
 
-import { AnimatePresence, animate, motion, useReducedMotion } from "framer-motion";
+import gsap from "gsap";
+import { isCalm } from "@/lib/calm";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { peso, studio, type Service } from "@/lib/content";
 import { addDays, closedReason, label12, manilaNow, type Hours } from "@/lib/schedule";
@@ -46,25 +47,28 @@ const validEmail = (v: string) => !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test
 function Total({ value }: { value: number }) {
   const ref = useRef<HTMLElement>(null);
   const prev = useRef(0);
-  const reduce = useReducedMotion();
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (reduce) {
+    if (isCalm()) {
       el.textContent = peso(value);
       prev.current = value;
       return;
     }
-    const c = animate(prev.current, value, {
+    const n = { v: prev.current };
+    const c = gsap.to(n, {
+      v: value,
       duration: 0.6,
-      ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => {
-        el.textContent = peso(Math.round(v));
+      ease: "expo.out",
+      onUpdate: () => {
+        el.textContent = peso(Math.round(n.v));
       },
     });
     prev.current = value;
-    return () => c.stop();
-  }, [value, reduce]);
+    return () => {
+      c.kill();
+    };
+  }, [value]);
   return <strong ref={ref}>{peso(0)}</strong>;
 }
 
@@ -201,14 +205,7 @@ export default function Booking({ services, hours }: { services: Service[]; hour
               ))}
             </div>
 
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={step}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              >
+            <div key={step} className="step-in">
                 {step === 0 && (
                   <>
                     <div className="tabs" role="group" aria-label="Service groups">
@@ -340,8 +337,7 @@ export default function Booking({ services, hours }: { services: Service[]; hour
                     </label>
                   </div>
                 )}
-              </motion.div>
-            </AnimatePresence>
+            </div>
 
             <div className="nav-row">
               {!canNext && (

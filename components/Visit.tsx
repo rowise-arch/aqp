@@ -1,6 +1,7 @@
 import { studio } from "@/lib/content";
 import { hoursRows, type Hours } from "@/lib/schedule";
 import type { Review } from "@/lib/site-data";
+import LazyMap from "./LazyMap";
 import MapLink from "./MapLink";
 import SampleNote from "./SampleNote";
 
@@ -57,12 +58,7 @@ export default function Visit({ hours, policy, reviews, sample }: Props) {
         </div>
 
         <div className="map">
-          <iframe
-            title="Map showing AQP Beauty Studio in Odiongan"
-            src={`https://www.google.com/maps?q=${q}&output=embed`}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
+          <LazyMap query={q} />
         </div>
       </div>
 

@@ -1688,3 +1688,35 @@ html.motion .overture .facts li[data-side="r"] {
 html.calm {
   scroll-behavior: auto;
 }
+
+/* Booking steps fade up as they change */
+.step-in {
+  animation: step-in 0.35s var(--ease);
+}
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+html.calm .step-in {
+  animation: none;
+}
+
+.visit .map-load {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+  width: 100%;
+  height: min(70svh, 560px);
+  min-height: 340px;
+  border: 1px solid var(--line);
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: var(--step-lead);
+  cursor: pointer;
+}
+.visit .map-load:hover {
+  border-color: var(--accent);
+}
