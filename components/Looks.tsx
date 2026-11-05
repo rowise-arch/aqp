@@ -9,10 +9,11 @@ import SampleNote from "./SampleNote";
 import { isCalm } from "@/lib/calm";
 
 gsap.registerPlugin(ScrollTrigger);
+// phone address bars grow and shrink while scrolling; that must not re-measure the pinned row
+ScrollTrigger.config({ ignoreMobileResize: true });
 
-// On a wide screen the section pins and the cards travel sideways as you scroll (it follows your own scrolling,
-// so it stays on even when the system asks for reduced motion).
-// Otherwise it is a plain row: swipe, drag with a mouse, or use the arrows.
+// On every screen size the section pins and the cards travel sideways as you scroll down the page.
+// With Calm motion on it is a plain row instead: swipe, drag with a mouse, or use the arrows.
 export default function Looks() {
   const section = useRef<HTMLElement>(null);
   const ref = useRef<HTMLUListElement>(null);
@@ -45,7 +46,7 @@ export default function Looks() {
     window.addEventListener("pointerup", pu);
 
     const mm = gsap.matchMedia();
-    mm.add("(min-width: 901px)", () => {
+    mm.add("(min-width: 0px)", () => {
       if (isCalm()) return;
       sec.classList.add("pinmode");
       // while the row travels with the page scroll it is not a scroller, so it should not be a tab stop
